@@ -5,13 +5,15 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [validForm, setValidForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [form, setForm] = useState({});
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("your description");
   const [author, setAuthor] = useState("todd albert");
 
   useEffect(() => {
     //fetch stuff
-    if (title.length > 3 && description.length > 10) {
+    if (form?.title?.length > 3 && form?.description?.length > 10) {
       setValidForm(true);
     } else {
       setValidForm(false);
@@ -70,6 +72,13 @@ function App() {
     }
   }
 
+    console.log(`this is a form: `, form)
+
+    const updateForm = (event) => {
+      setForm({...form, [event.target.name]: event.target.value})
+    }
+
+
   return (
     <div className="App">
       <form onSubmit={formSubmit}>
@@ -79,22 +88,23 @@ function App() {
         <label>Title</label>
         <input
           type="text"
+          name="title"
           // required
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+          value={form.title}
+          onChange = {updateForm}
+        
         />
-        <h3>{title}</h3>
+        <h3>{form.title}</h3>
+
+            <span></span>
 
         {/* this is the description */}
         <label>Description</label>
         <textarea
-          value={description}
+          value={form.description}
+          name= "description"
           required
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+          onChange={updateForm}
         />
 
         <h3>{description}</h3>
@@ -102,10 +112,8 @@ function App() {
         {/* THIS IS THE AUTHOR */}
         <label>Author</label>
         <select
-          value={author}
-          onChange={(e) => {
-            setAuthor(e.target.value);
-          }}
+          value={form.author}
+          onChange={updateForm}
         >
           <option value="" selected>
             Choose One
