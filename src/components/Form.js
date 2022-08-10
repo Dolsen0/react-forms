@@ -84,7 +84,7 @@ export default function Form(){
           <div className="App">
             
             <form onSubmit={formSubmit}>
-            <About />
+        
               <h1>Comments</h1>
       
               {/* here goes the title */}

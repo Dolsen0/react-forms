@@ -1,12 +1,28 @@
-import { useEffect, useState } from "react";
-import About from "./pages/About";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import "./App.css";
-import Form from "./components/Form";
+import {Home} from "./pages/Home";
+import About from "./pages/About";
+import Header from "./components/Header";
+import Contact from "./pages/contacts";
+import Footer from "./components/Footer";
 
 const App = () => {
   return(
     <>
-    <Form />
+    <BrowserRouter>
+    <Routes>
+      <Route path='about' element={<About />} />
+      <Route path='contact' element ={<Contact />} />
+      <Route path='*' element ={<h4>Page not found</h4>} />
+    </Routes>
+    {/* <Home />
+    <Header />
+    <About />
+    <Contact />
+    <Footer /> */}
+    </BrowserRouter>
     </>
   )
 }
